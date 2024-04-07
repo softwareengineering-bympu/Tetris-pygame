@@ -16,6 +16,11 @@ class Game(pygame.sprite.Sprite):
         self.dropBlockGroup = None
         self.nextBlockGroup = None
         self.generateNextBlockGroup()
+        self.gameOverImage = pygame.image.load("pic/gameover.png")
+        self.isGameOver = False
+
+    def getGameOver(self):
+        return self.isGameOver
 
     def generateDropBlockGroup(self):
         self.dropBlockGroup = self.nextBlockGroup
@@ -40,8 +45,11 @@ class Game(pygame.sprite.Sprite):
                 return True
         return False
 
-
     def update(self):
+        if self.isGameOver:
+            return
+        self.checkGameOver()
+
         self.fixedBlockGroup.update()
 
         if self.fixedBlockGroup.getEliminate():
@@ -62,12 +70,30 @@ class Game(pygame.sprite.Sprite):
             if eliminateRows > 0:
                 self.score += 1 * eliminateRows
 
+    def checkGameOver(self):
+        allIndexes = self.fixedBlockGroup.getBlockIndexes()
+        for index in allIndexes:
+            if index[0] < 2:
+                self.isGameOver = True
+
     def draw(self):
         self.fixedBlockGroup.draw(self.screen)
         if self.dropBlockGroup:
             self.dropBlockGroup.draw(self.screen)
         self.nextBlockGroup.draw(self.screen)
 
-
         textImage = self.font.render('Score: ' + str(self.score), True, (255,255,255))
-        self.screen.blit(textImage, (10, 20))
+        self.screen.blit(textImage, (10, 80))
+        if self.isGameOver:
+            rect = self.gameOverImage.get_rect()
+            rect.centerx = const.GAME_WIDTH_SIZE / 2
+            rect.centery = const.GAME_HEIGHT_SIZE / 2
+            self.screen.blit(self.gameOverImage, rect)
+        
+    def drawPauseSurface(self):
+        pause_text = pygame.font.SysFont(None, 40).render("Game Paused", True, (255, 0, 0))
+        pause_hint = pygame.font.SysFont(None, 40).render("Press ESC or the Pause to continue", True, (255, 255, 255))
+        self.screen.blit(pause_text, (const.GAME_WIDTH_SIZE // 2 - pause_text.get_width() // 2,
+                                      const.GAME_HEIGHT_SIZE // 2 - pause_text.get_height() // 2 - 30))
+        self.screen.blit(pause_hint, (const.GAME_WIDTH_SIZE // 2 - pause_text.get_width() // 2 - 125,
+                                      const.GAME_HEIGHT_SIZE // 2 - pause_text.get_height() // 2))
