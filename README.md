@@ -1,4 +1,4 @@
-# Tetris a Mirco Pygame
+# Tetris a Micro Pygame
 
 ## Purpose of the Software
 
