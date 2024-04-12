@@ -1,6 +1,5 @@
 import random
-import pygame, sys
-from pygame.locals import *
+import pygame.mixer
 from block import *
 from utils import *
 
@@ -30,7 +29,7 @@ class BlockGroup(object):
         self.blocks = []
         self.blockGroupType = blockGroupType
         self.dropTime = getCurrentTime()
-        self.dropInterval = 0
+        self.dropInterval = 900
         self.pressTime = {}
         self.eliminate = False
         self.eliminateRow = []
@@ -39,6 +38,20 @@ class BlockGroup(object):
             block = Block(config['blockType'], config['rowIdx'], config['colIdx'], config['blockShape'],
                         config['blockRotate'], config['blockGroupIdx'], width, height, relPos)
             self.blocks.append(block)
+        self.isPause = False
+        self.isFallingDown = False
+
+    def setDropInterval(self, dropInterval):
+        self.dropInterval = dropInterval
+
+    def getDropInterval(self):
+        return self.dropInterval
+
+    def getFallingDown(self):
+        return self.isFallingDown
+    
+    def setFallingDown(self, isFallingDown):
+        self.isFallingDown = isFallingDown
 
     def setBaseIndexes(self, baseRow, baseCol):
         for block in self.blocks:
@@ -72,7 +85,7 @@ class BlockGroup(object):
 
     def keyDownHandler(self):
         pressed = pygame.key.get_pressed()
-        if pressed[K_LEFT] and self.checkAndSetPressTime(K_LEFT):
+        if pressed[K_LEFT] and self.checkAndSetPressTime(K_LEFT) and not self.isPause:
             b = True
             for block in self.blocks:
                 if block.isLeftBoundary():
@@ -82,7 +95,7 @@ class BlockGroup(object):
                 for block in self.blocks:
                     block.moveLeft()
 
-        if pressed[K_RIGHT] and self.checkAndSetPressTime(K_RIGHT):
+        if pressed[K_RIGHT] and self.checkAndSetPressTime(K_RIGHT) and not self.isPause:
             b = True
             for block in self.blocks:
                 if block.isRightBoundary():
@@ -92,14 +105,13 @@ class BlockGroup(object):
                 for block in self.blocks:
                     block.moveRight()
 
-        if pressed[K_UP] and self.checkAndSetPressTime(K_UP):
+        if pressed[K_UP] and self.checkAndSetPressTime(K_UP) and not self.isPause:
             for block in self.blocks:
                 block.rotate()
 
-        if pressed[K_DOWN]:
-            self.dropInterval = 30
-        else:
-            self.dropInterval = 1000
+        if pressed[K_DOWN] and not self.isPause:
+            self.setFallingDown(True)
+            pygame.event.set_blocked(pygame.KEYDOWN)
 
         if self.blockGroupType == const.BlockGroupType.DROP:
             for block in self.blocks:
@@ -115,6 +127,8 @@ class BlockGroup(object):
                 for b in self.blocks:
                     b.drop(1)
             self.keyDownHandler()
+            if self.getFallingDown():
+                self.setDropInterval(30)
 
         for block in self.blocks:
             block.update()
@@ -142,6 +156,9 @@ class BlockGroup(object):
         for block in self.blocks:
             if eliminateRow.get(block.getIndex()):
                 block.startBlink()
+                sound = pygame.mixer.Sound(const.ELIMINATE_SOUND)
+                sound.set_volume(0.15)
+                sound.play()
 
     def processEliminate(self):
         hash = {}
