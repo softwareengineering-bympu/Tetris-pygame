@@ -50,15 +50,11 @@ This project aims to develop a Tetris game, providing players with the classic T
    - *Integrate sound effects for game events.*
    - *Sound effects add immersion and feedback to gameplay.*
 
-4. **Difficulty Adjustment**
-   - *Implement dynamic difficulty scaling.*
-   - *Dynamic difficulty keeps the game challenging and engaging.*
-
-5. **Pause**
+4. **Pause**
    - *Add functionality for pausing and saving the game state.*
    - *Pausing and saving improve user convenience.*
 
-6. **User Interface Enhancement**
+5. **User Interface Enhancement**
    - *Improve user interaction elements.*
    - *Clear instructions and intuitive controls enhance usability.*
 
