@@ -2,19 +2,20 @@ import pygame, sys
 from pygame.locals import *
 import const
 from game import Game
+
+pygame.init()
+background = pygame.image.load(const.BACKGROUND_IMAGE)
+DISPLAYSURF = pygame.display.set_mode((const.GAME_WIDTH_SIZE, const.GAME_HEIGHT_SIZE))
+game = Game(DISPLAYSURF)
+
+# pause and restart button set
+pause_button_rect = pygame.Rect(10, 10, 80, 80)
+pause_button_image = pygame.image.load(const.PAUSE_BUTTON_IMAGE)
+restart_button_rect = pygame.Rect(300, 300, 200, 124)
+restart_button_image = pygame.image.load(const.RESTART_BUTTON_IMAGE)
+
 def main():
-    pygame.init()
-    background = pygame.image.load(const.BACKGROUND_IMAGE)
-    DISPLAYSURF = pygame.display.set_mode((const.GAME_WIDTH_SIZE, const.GAME_HEIGHT_SIZE))
-    game = Game(DISPLAYSURF)
-
-    # pause and restart button set
-    pause_button_rect = pygame.Rect(10, 10, 80, 80)
-    pause_button_image = pygame.image.load(const.PAUSE_BUTTON_IMAGE)
-    restart_button_rect = pygame.Rect(300, 300, 200, 124)
-    restart_button_image = pygame.image.load(const.RESTART_BUTTON_IMAGE)
-
-    # pause boolean
+    # # pause boolean
     is_paused = False
 
     while True:
@@ -32,6 +33,7 @@ def main():
                 if pause_button_rect.collidepoint(event.pos):
                     is_paused = not is_paused
                 if restart_button_rect.collidepoint(event.pos):
+                    game.restart()
                     main()
 
         # pause hint surface
