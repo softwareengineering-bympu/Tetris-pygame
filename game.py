@@ -1,5 +1,3 @@
-import pygame, sys
-from pygame.locals import *
 from blockGroup import *
 import const
 
@@ -11,13 +9,22 @@ class Game(pygame.sprite.Sprite):
         self.font = pygame.font.Font(None, 60)
         self.score = 0
         self.screen = screen
-        self.isGameOver = False
         self.fixedBlockGroup = BlockGroup(const.BlockGroupType.FIXED, const.BLOCK_SIZE_W, const.BLOCK_SIZE_H, [], self.getRelPos())
         self.dropBlockGroup = None
         self.nextBlockGroup = None
         self.generateNextBlockGroup()
         self.gameOverImage = pygame.image.load("pic/gameover.png")
         self.isGameOver = False
+        self.isPlayGameOverSound = False
+        self.isPause = False
+        self.pause_button_image = pygame.image.load(const.PAUSE_BUTTON_IMAGE)
+        self.restart_button_image = pygame.image.load(const.RESTART_BUTTON_IMAGE)
+
+    def getPause(self):
+        return self.isPause
+    
+    def setPause(self, isPause):
+        self.isPause = isPause
 
     def getGameOver(self):
         return self.isGameOver
@@ -59,8 +66,11 @@ class Game(pygame.sprite.Sprite):
             self.dropBlockGroup.update()
         else:
             self.generateDropBlockGroup()
+            self.dropBlockGroup.setDropInterval(900)
 
         if self.isCollision():
+            pygame.event.set_allowed(pygame.KEYDOWN)
+            self.dropBlockGroup.setFallingDown(False)
             blocks = self.dropBlockGroup.getBlocks()
             for block in blocks:
                 self.fixedBlockGroup.addBlocks(block)
@@ -89,6 +99,12 @@ class Game(pygame.sprite.Sprite):
             rect.centerx = const.GAME_WIDTH_SIZE / 2
             rect.centery = const.GAME_HEIGHT_SIZE / 2
             self.screen.blit(self.gameOverImage, rect)
+            if not self.isPlayGameOverSound:
+                sound = pygame.mixer.Sound(const.GAMEOVER_SOUND)
+                sound.play()
+                while pygame.mixer.get_busy():
+                    pass
+                self.isPlayGameOverSound = True
         
     def drawPauseSurface(self):
         pause_text = pygame.font.SysFont(None, 40).render("Game Paused", True, (255, 0, 0))
@@ -97,3 +113,11 @@ class Game(pygame.sprite.Sprite):
                                       const.GAME_HEIGHT_SIZE // 2 - pause_text.get_height() // 2 - 30))
         self.screen.blit(pause_hint, (const.GAME_WIDTH_SIZE // 2 - pause_text.get_width() // 2 - 125,
                                       const.GAME_HEIGHT_SIZE // 2 - pause_text.get_height() // 2))
+        
+    def restart(self):
+        self.fixedBlockGroup.clearBlocks()
+        self.score = 0
+        self.isGameOver = False
+        self.isPlayGameOverSound = False
+        self.generateDropBlockGroup()
+        self.generateNextBlockGroup()
