@@ -54,17 +54,13 @@ This project aims to develop a Tetris game, providing players with the classic T
    - *Implement dynamic difficulty scaling.*
    - *Dynamic difficulty keeps the game challenging and engaging.*
 
-5. **Pause and Save**
+5. **Pause**
    - *Add functionality for pausing and saving the game state.*
    - *Pausing and saving improve user convenience.*
 
 6. **User Interface Enhancement**
    - *Improve user interaction elements.*
    - *Clear instructions and intuitive controls enhance usability.*
-
-7. **Error Handling and Logging**
-   - *Implement robust error handling and logging.*
-   - *Proper error handling ensures stability and easier debugging.*
 
 ## Development and Runtime Environment, Language, and Minimum System Requirements
 
