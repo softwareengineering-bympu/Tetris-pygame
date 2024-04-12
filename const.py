@@ -1,5 +1,11 @@
+import pygame
+
 GAME_WIDTH_SIZE = 800
 GAME_HEIGHT_SIZE = 600
+
+BACKGROUND_IMAGE = "pic/background.png"
+PAUSE_BUTTON_IMAGE = "pic/pause.png"
+RESTART_BUTTON_IMAGE = "pic/restart.png"
 
 # Number the color to create block in random color
 class BlockType:
@@ -25,6 +31,9 @@ BLOCK_RES = {
     BlockType.BLUE: "pic/blue.png",
     BlockType.PURPLE: "pic/purple.png",
 }
+
+ELIMINATE_SOUND = "audio/eliminate_soundeffect.mp3"
+GAMEOVER_SOUND = "audio/gameover_soundeffect.mp3"
 
 # Screen boundary
 GAME_ROW = 17
