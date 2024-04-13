@@ -1,8 +1,12 @@
 # Tetris a Micro Pygame
 
+
+
 ## Purpose of the Software
 
 This project aims to develop a Tetris game, providing players with the classic Tetris gaming experience. Tetris is a classic puzzle game where players control different shapes of blocks, called tetrominos, to move them vertically or rotate them to fill complete horizontal lines. When a line is completed, it disappears, and the player earns points. The game's difficulty increases as more lines are cleared, until the game area is filled, or the player cannot move the falling tetrominos anymore.
+
+
 
 ## Operating
 
@@ -10,22 +14,34 @@ This project aims to develop a Tetris game, providing players with the classic T
 - **Rotation direction control:** use the up keys of the keyboard to achieve(⬆)
 - **Fast fall control** use the down keys of the keyboard to achieve(⬇)
 
+
+
 ## Development and Runtime Environment, Language, and Minimum System Requirements
 
 ### Development Environment:
+
 - Python 3.x
 - Pygame
 - Visual Studio Code or any other code editor
 
+
+
 ### Runtime Environment:
+
 - Operating System: Windows, MacOS, Linux, etc.
 - Python 3.x runtime environment
 - Pygame library
 
+
+
 ### Language:
+
 - Python
 
+
+
 ### Minimum System Requirements:
+
 - CPU: 1 GHz or more powerful processor
 - Memory: 1 GB RAM at least
 - Graphics Card: OpenGL 2.0 compatible
@@ -33,9 +49,13 @@ This project aims to develop a Tetris game, providing players with the classic T
 
 ***<font color="red">Ensure the required environment is set up correctly, and minimum system requirements are met to ensure optimal gameplay experience.</font>***
 
+
+
 ## Development Plan
 
-### Phase One: Environment Setup and Basic Functionality Implementation
+### Development Process
+
+#### Phase One: Environment Setup and Basic Functionality Implementation
 
 1. **Environment Setup**
    - *Download and install Python 3.x and set up a code editor.*
@@ -65,7 +85,9 @@ This project aims to develop a Tetris game, providing players with the classic T
    - *Implement logic for clearing completed lines.*
    - *Line clearing is a core mechanic for scoring and progression.*
 
-### Phase Two: Game Functionality Enhancement and Optimization
+
+
+#### Phase Two: Game Functionality Enhancement and Optimization
 
 1. **Tetromino Rotation Optimization**
    - *Improve rotation mechanics for tetrominos.*
@@ -86,4 +108,36 @@ This project aims to develop a Tetris game, providing players with the classic T
 5. **User Interface Enhancement**
    - *Improve user interaction elements.*
    - *Clear instructions and intuitive controls enhance usability.*
+
+
+
+### Members
+
+Hanson (P2211630)
+
+* **Project Manager** (make development plan)
+* **Main programmer** (solve problems in game running, develop basic logic of the game)
+* Create Variable Table and Requirement Table for code development
+* Help write README.md
+
+Richard (P2211590)
+
+* **Repository manager**
+
+* **Main programmer** (develop basic logic of the game)
+* Help write README.md
+
+Bless ()
+
+* **Main programmer** (develop basic class - block.py, blockType.py)
+* **Test controller** (test the problem of the game)
+* Help write README.md
+
+Kaylee ()
+
+* **Programmer** (write const.py, one of basic class file aggregated all of materials)
+
+* **Test controller** (test the problem of the game)
+* Find materials (image, audio, etc)
+* Help write README.md
 
