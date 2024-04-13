@@ -10,6 +10,29 @@ This project aims to develop a Tetris game, providing players with the classic T
 - **Rotation direction control:** use the up keys of the keyboard to achieve(⬆)
 - **Fast fall control** use the down keys of the keyboard to achieve(⬇)
 
+## Development and Runtime Environment, Language, and Minimum System Requirements
+
+### Development Environment:
+- Python 3.x
+- Pygame
+- Visual Studio Code or any other code editor
+
+### Runtime Environment:
+- Operating System: Windows, MacOS, Linux, etc.
+- Python 3.x runtime environment
+- Pygame library
+
+### Language:
+- Python
+
+### Minimum System Requirements:
+- CPU: 1 GHz or more powerful processor
+- Memory: 1 GB RAM at least
+- Graphics Card: OpenGL 2.0 compatible
+- Storage: At least 100 MB available space
+
+***<font color="red">Ensure the required environment is set up correctly, and minimum system requirements are met to ensure optimal gameplay experience.</font>***
+
 ## Development Plan
 
 ### Phase One: Environment Setup and Basic Functionality Implementation
@@ -64,25 +87,3 @@ This project aims to develop a Tetris game, providing players with the classic T
    - *Improve user interaction elements.*
    - *Clear instructions and intuitive controls enhance usability.*
 
-## Development and Runtime Environment, Language, and Minimum System Requirements
-
-### Development Environment:
-- Python 3.x
-- Pygame
-- Visual Studio Code or any other code editor
-
-### Runtime Environment:
-- Operating System: Windows, MacOS, Linux, etc.
-- Python 3.x runtime environment
-- Pygame library
-
-### Language:
-- Python
-
-### Minimum System Requirements:
-- CPU: 1 GHz or higher processor
-- Memory: 1 GB RAM
-- Graphics Card: OpenGL 2.0 compatible
-- Storage: At least 100 MB available space
-
-Ensure the required environment is set up correctly, and minimum system requirements are met to ensure optimal gameplay experience.
