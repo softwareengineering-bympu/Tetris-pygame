@@ -1,5 +1,7 @@
 from blockGroup import *
 import const
+import pygame, sys
+from pygame.locals import *
 
 class Game(pygame.sprite.Sprite):
     def getRelPos(self):
@@ -17,14 +19,19 @@ class Game(pygame.sprite.Sprite):
         self.isGameOver = False
         self.isPlayGameOverSound = False
         self.isPause = False
+        self.isStart = True
+        self.pause_button_rect = pygame.Rect(10, 10, 56, 56)
         self.pause_button_image = pygame.image.load(const.PAUSE_BUTTON_IMAGE)
+        self.restart_button_rect = pygame.Rect(300, 300, 156, 51)
         self.restart_button_image = pygame.image.load(const.RESTART_BUTTON_IMAGE)
+        self.backstart_button_rect = pygame.Rect(290, 345, 58, 59)
+        self.backstart_button_image = pygame.image.load(const.BACKSTART_BUTTON_IMAGE)
+
+    def getStart(self):
+        return self.isStart
 
     def getPause(self):
         return self.isPause
-    
-    def setPause(self, isPause):
-        self.isPause = isPause
 
     def getGameOver(self):
         return self.isGameOver
@@ -69,7 +76,6 @@ class Game(pygame.sprite.Sprite):
             self.dropBlockGroup.setDropInterval(900)
 
         if self.isCollision():
-            pygame.event.set_allowed(pygame.KEYDOWN)
             self.dropBlockGroup.setFallingDown(False)
             blocks = self.dropBlockGroup.getBlocks()
             for block in blocks:
@@ -86,7 +92,7 @@ class Game(pygame.sprite.Sprite):
             if index[0] < 2:
                 self.isGameOver = True
 
-    def draw(self):
+    def drawMain(self):
         self.fixedBlockGroup.draw(self.screen)
         if self.dropBlockGroup:
             self.dropBlockGroup.draw(self.screen)
@@ -111,13 +117,64 @@ class Game(pygame.sprite.Sprite):
         pause_hint = pygame.font.SysFont(None, 40).render("Press ESC or the Pause to continue", True, (255, 255, 255))
         self.screen.blit(pause_text, (const.GAME_WIDTH_SIZE // 2 - pause_text.get_width() // 2,
                                       const.GAME_HEIGHT_SIZE // 2 - pause_text.get_height() // 2 - 30))
-        self.screen.blit(pause_hint, (const.GAME_WIDTH_SIZE // 2 - pause_text.get_width() // 2 - 125,
-                                      const.GAME_HEIGHT_SIZE // 2 - pause_text.get_height() // 2))
-        
+        self.screen.blit(pause_hint, (const.GAME_WIDTH_SIZE // 2 - pause_hint.get_width() // 2,
+                                      const.GAME_HEIGHT_SIZE // 2 - pause_hint.get_height() // 2))
+        self.drawRestartButton(400, 345)
+
+    def drawPauseButton(self):
+        self.screen.blit(self.pause_button_image, self.pause_button_rect)
+
+    def pauseControl(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                self.isPause = not self.isPause
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.pause_button_rect.collidepoint(event.pos):
+                self.isPause = not self.isPause
+
+    def setRestartButton(self, x, y):
+        self.restart_button_rect.x = x
+        self.restart_button_rect.y = y
+
+    def drawRestartButton(self, x, y):
+        self.setRestartButton(x, y)
+        self.screen.blit(self.restart_button_image, self.restart_button_rect)
+
+    def restartControl(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.restart_button_rect.collidepoint(event.pos):
+                self.isPause = not self.isPause
+                self.restart()
+
     def restart(self):
+        self.isPause = False
         self.fixedBlockGroup.clearBlocks()
         self.score = 0
         self.isGameOver = False
         self.isPlayGameOverSound = False
         self.generateDropBlockGroup()
         self.generateNextBlockGroup()
+
+    def quitControl(self, event):
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+    def drawStartSurface(self):
+        start_cover = pygame.image.load(const.START_COVER)
+        self.screen.blit(start_cover, (0, 0))
+        start_text = pygame.font.SysFont(None, 50).render("Press Space to start", True, (255, 255, 255))
+        self.screen.blit(start_text, (const.GAME_WIDTH_SIZE // 2 - start_text.get_width() // 2,
+                                      const.GAME_HEIGHT_SIZE // 2 - start_text.get_height() // 2 + 130))
+        
+    def startControl(self, event):
+        if event.type == pygame.KEYDOWN and self.isStart == True:
+            if event.key == pygame.K_SPACE:
+                self.isStart = False
+        
+    def backStartControl(self, event):
+        self.screen.blit(self.backstart_button_image, self.backstart_button_rect)
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.isStart == False:
+            if self.backstart_button_rect.collidepoint(event.pos):
+                self.isStart = True
+                self.isPause = False

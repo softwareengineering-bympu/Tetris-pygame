@@ -3,9 +3,11 @@ import pygame
 GAME_WIDTH_SIZE = 800
 GAME_HEIGHT_SIZE = 600
 
+START_COVER = "pic/start_cover.png"
 BACKGROUND_IMAGE = "pic/background.png"
 PAUSE_BUTTON_IMAGE = "pic/pause.png"
 RESTART_BUTTON_IMAGE = "pic/restart.png"
+BACKSTART_BUTTON_IMAGE = "pic/return.png"
 
 # Number the color to create block in random color
 class BlockType:

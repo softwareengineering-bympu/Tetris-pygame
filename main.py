@@ -8,52 +8,36 @@ background = pygame.image.load(const.BACKGROUND_IMAGE)
 DISPLAYSURF = pygame.display.set_mode((const.GAME_WIDTH_SIZE, const.GAME_HEIGHT_SIZE))
 game = Game(DISPLAYSURF)
 
-# pause and restart button set
-pause_button_rect = pygame.Rect(10, 10, 80, 80)
-pause_button_image = pygame.image.load(const.PAUSE_BUTTON_IMAGE)
-restart_button_rect = pygame.Rect(300, 300, 200, 124)
-restart_button_image = pygame.image.load(const.RESTART_BUTTON_IMAGE)
+while True:
+    for event in pygame.event.get():
+        game.quitControl(event)
 
-def main():
-    # # pause boolean
-    is_paused = False
+        # pause control
+        game.pauseControl(event)
 
-    while True:
+    if game.getStart():
+        game.drawStartSurface()
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-
-            # pause control
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    is_paused = not is_paused
-
-            if event.type == MOUSEBUTTONDOWN and event.button == 1:
-                if pause_button_rect.collidepoint(event.pos):
-                    is_paused = not is_paused
-                if restart_button_rect.collidepoint(event.pos):
-                    game.restart()
-                    main()
-
+            game.startControl(event)
+            game.quitControl(event)
+    else:
         # pause hint surface
-        if is_paused:
+        if game.getPause():
             game.drawPauseSurface()
-            DISPLAYSURF.blit(restart_button_image, (restart_button_rect.x + 10, restart_button_rect.y + 10))
+            for event in pygame.event.get():
+                game.quitControl(event)
+                game.pauseControl(event)
+                game.backStartControl(event)
+                game.restartControl(event)
 
         else:
             # common logic
             game.update()
             DISPLAYSURF.fill((0, 0, 0))
             DISPLAYSURF.blit(background, (0, 0))
-            game.draw()
+            game.drawMain()
             if game.getGameOver():
-                DISPLAYSURF.blit(restart_button_image, (restart_button_rect.x + 10, restart_button_rect.y + 30))
+                game.drawRestartButton(330, 400)
+            game.drawPauseButton()
 
-            DISPLAYSURF.blit(pause_button_image, (pause_button_rect.x + 10, pause_button_rect.y + 10))
-
-        pygame.display.update()
-
-
-if __name__ == '__main__':
-    main()
+    pygame.display.update()
