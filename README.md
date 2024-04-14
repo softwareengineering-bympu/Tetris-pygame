@@ -118,9 +118,9 @@ Kaylee ()
 
 **3.7 - 4.9:** Developing, coding, testing and problem solving
 
-**4.9 - 4.14: ** Writing README document and recording videos
+**4.9 - 4.14:** Writing README document and recording videos
 
-**4.14 - 4.20: ** Final check of the project
+**4.14 - 4.20:** Final check of the project
 
 
 
