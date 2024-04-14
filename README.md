@@ -1,13 +1,9 @@
 # Tetris - a Micro Pygame
+
+
 ## Graphical Abstract
 <img decoding="async" src="readme_img/init_cover.png" width="400px" />
 <img decoding="async" src="readme_img/basic_op.gif" width="400px" />
-
-**<font size="6">Graphical Abstract</font>**
-
-<img decoding="async" src="readme_img/init_cover.png" width="400px" />
-
-<img decoding="async" src="readme_img/basic_op.gif" width="400px">
 
 
 
