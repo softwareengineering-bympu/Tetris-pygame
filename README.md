@@ -3,6 +3,14 @@
 <img decoding="async" src="readme_img/init_cover.png" width="400px" />
 <img decoding="async" src="readme_img/basic_op.gif" width="400px" />
 
+**<font size="6">Graphical Abstract</font>**
+
+<img decoding="async" src="readme_img/init_cover.png" width="400px">
+
+<img decoding="async" src="readme_img/basic_op.gif" width="400px">
+
+
+
 ## Introduction
 
 This project aims to develop a Tetris game, providing players with the classic Tetris gaming experience. Tetris is a classic puzzle game where players control different shapes of blocks, called tetrominos, to move them vertically or rotate them to fill complete horizontal lines. When a line is completed, it disappears, and the player earns points. The game's difficulty increases as more lines are cleared, until the game area is filled, or the player cannot move the falling tetrominos anymore.
@@ -88,7 +96,7 @@ This project aims to develop a Tetris game, providing players with the classic T
 Hanson (P2211630)
 
 * **Project Manager** (make development plan)
-* **Main programmer** (solve problems in game running, develop basic logic of the game)
+* **Main programmer** (solve problems in game running, develop basic logic of the game and set an initial cover)
 * Create Variable Table and Requirement Table for code development
 * Help write README.md
 
@@ -142,7 +150,6 @@ Kaylee ()
 ### Future Plan
 
 * Make archived files to store the current status of the game
-* Make a remarkable cover if possible
 * Develop level mode and infinity mode for challenging
 
 
