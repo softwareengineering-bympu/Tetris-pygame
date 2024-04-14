@@ -8,7 +8,7 @@ This project aims to develop a Tetris game, providing players with the classic T
 
 ## How to operate?
 
-- **Left and right movement control:** use the left and right direction keys of the keyboard to achieve(⬅)(➡️)
+- **Left and right movement control:** use the left and right direction keys of the keyboard to achieve(⬅)(⮕)
 - **Rotation direction control:** use the up keys of the keyboard to achieve(⬆)
 - **Fast fall control** use the down keys of the keyboard to achieve(⬇)
 
