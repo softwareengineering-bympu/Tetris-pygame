@@ -120,6 +120,7 @@ class Game(pygame.sprite.Sprite):
         self.screen.blit(pause_hint, (const.GAME_WIDTH_SIZE // 2 - pause_hint.get_width() // 2,
                                       const.GAME_HEIGHT_SIZE // 2 - pause_hint.get_height() // 2))
         self.drawRestartButton(400, 345)
+        self.drawBackStartButton()
 
     def drawPauseButton(self):
         self.screen.blit(self.pause_button_image, self.pause_button_rect)
@@ -172,8 +173,10 @@ class Game(pygame.sprite.Sprite):
             if event.key == pygame.K_SPACE:
                 self.isStart = False
         
-    def backStartControl(self, event):
+    def drawBackStartButton(self):
         self.screen.blit(self.backstart_button_image, self.backstart_button_rect)
+
+    def backStartControl(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.isStart == False:
             if self.backstart_button_rect.collidepoint(event.pos):
                 self.isStart = True
