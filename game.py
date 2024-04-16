@@ -168,16 +168,16 @@ class Game(pygame.sprite.Sprite):
         self.screen.blit(start_text, (const.GAME_WIDTH_SIZE // 2 - start_text.get_width() // 2,
                                       const.GAME_HEIGHT_SIZE // 2 - start_text.get_height() // 2 + 130))
         
-    def startControl(self, event):
-        if event.type == pygame.KEYDOWN and self.isStart == True:
-            if event.key == pygame.K_SPACE:
-                self.isStart = False
+    def startControl(self):
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_SPACE]:
+            self.isStart = False
         
     def drawBackStartButton(self):
         self.screen.blit(self.backstart_button_image, self.backstart_button_rect)
 
     def backStartControl(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.isStart == False:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.backstart_button_rect.collidepoint(event.pos):
                 self.isStart = True
                 self.isPause = False

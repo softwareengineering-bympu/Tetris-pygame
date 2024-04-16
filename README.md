@@ -1,10 +1,15 @@
 # Tetris - a Micro Pygame
+**Demonstration:** 
+
+
+
 **Introduction**
 
 This project aims to develop a Tetris game, providing players with the classic Tetris gaming experience. Tetris is a classic puzzle game where players control different shapes of blocks, called tetrominos, to move them vertically or rotate them to fill complete horizontal lines. When a line is completed, it disappears, and the player earns points. The game's difficulty increases as more lines are cleared, until the game area is filled, or the player cannot move the falling tetrominos anymore.
 
 ## Graphical Abstract
 <img decoding="async" src="readme_img/init_cover.png" width="400px" />
+
 <img decoding="async" src="readme_img/basic_op.gif" width="400px" />
 
 ## How to operate?
