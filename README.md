@@ -127,7 +127,7 @@ Kaylee ()
 We Divide blocks into several groups to handle all of the status:
   * Single Block: With rotate(), moveLeft(), moveRigh()t, isLeftBoundary(), isRightBoundary() and etc. , we can easily handle the status of single block in the game.
   * Block Group: One shape of 4 blocks is a block group. We set up basic keyboard controls for its operations. For the rotation, we firstly set up every shape the block group will be in the const.py, then we can easily use them with the index to handle the operation.
-  * Fixed Block Group: We use lists to record every time the fixed block group will be like.
+  * Fixed Block Group: We use a list to record every time the fixed block group will be like.
   * Block Elimination: We simply use lists to record the row of blocks that should be eliminated, then it will be replaced with an empty list. 
   * Block Collision: We use a hash table to handle it. It firstly get all of the information about current block groups. If the index is found in the hash table, or the current row that one of the block in is larger or equal than the row of game, it indicates there is a collision.
   * Game logic: It always needs a infinite loop to run. Then we use many boolean values to handle current status of the game.
