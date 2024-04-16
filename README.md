@@ -22,7 +22,10 @@ This project aims to develop a Tetris game, providing players with the classic T
 
 ## Purpose of the software
 
-
+The purpose of our software is to develop a high-quality Tetris game. Tetris is a classic puzzle game where players must arrange falling blocks of different shapes to create complete rows. Our goal is to provide an engaging and enjoyable gaming experience for users, capturing the essence of the original game while incorporating modern features and enhancements.
+Architecture Approach: High-Quality + Waterfall
+For the development of our Tetris game, we have adopted a high-quality approach combined with the waterfall model. The high-quality approach ensures that our software meets the highest standards of functionality, usability, performance, and reliability. We prioritize robust code, efficient algorithms, and an intuitive user interface to deliver a seamless and enjoyable gaming experience.
+The waterfall model provides a structured framework for the development process. It involves distinct phases, including requirements gathering, design, implementation, testing, and deployment. This sequential approach allows for careful planning, thorough documentation, and well-defined milestones, ensuring that each stage is completed before moving to the next. By following the waterfall model, we aim to deliver a polished and error-free Tetris game that meets the specified requirements and exceeds user expectations.
 
 
 
@@ -101,13 +104,13 @@ Richard (P2211590)
 * **Main programmer** (develop basic logic of the game)
 * Help write README.md
 
-Bless ()
+Bless (P2211527)
 
 * **Main programmer** (develop basic class - block.py, blockType.py)
 * **Test controller** (test the problem of the game)
 * Help write README.md
 
-Kaylee ()
+Kaylee (P2211433)
 
 * **Programmer** (write const.py, one of basic class file aggregated all of materials)
 * **Test controller** (test the problem of the game)

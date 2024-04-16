@@ -10,11 +10,12 @@ game = Game(DISPLAYSURF)
 
 while True:
     for event in pygame.event.get():
-        game.pauseControl(event)
+        # every control in the event
         game.quitControl(event)
+        game.pauseControl(event)
+        game.startControl(event)
         game.backStartControl(event)
         game.restartControl(event)
-        game.startControl()
 
     if game.getStart():
         # draw the cover
@@ -32,7 +33,9 @@ while True:
             DISPLAYSURF.blit(background, (0, 0))
             game.drawMain()
             if game.getGameOver():
+                game.drawGameOverImage()
                 game.drawRestartButton(330, 400)
+                game.playGameOverSound()
             else:
                 game.drawPauseButton()
 
