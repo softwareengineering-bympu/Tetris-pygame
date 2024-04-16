@@ -146,7 +146,6 @@ We Divide blocks into several groups to handle all of the status:
 
 * Make archived files to store current status of the game
 * Develop level mode and infinity mode for challenging
-* Make it be able to run on other operating systems (Android, iOS, Mac, Linux, etc)
 
 
 
