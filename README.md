@@ -140,7 +140,7 @@ We Divide blocks into several groups to handle all of the status:
   * Fixed Block Group: We use a list to record every time the fixed block group will be like.
   * Block Elimination: We simply use lists to record the row of blocks that should be eliminated, then it will be replaced with an empty list. 
   * Block Collision: We use a hash table to handle it. It firstly get all of the information about current block groups. If the index is found in the hash table, or the current row that one of the block in is larger or equal than the row of game, it indicates there is a collision.
-  * Game logic: It always needs a infinite loop to run. Then we use many boolean values to handle current status of the game.
+  * Game Logic: It always needs a infinite loop to run. Then we use many boolean values to handle current status of the game.
 
 
 
