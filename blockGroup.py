@@ -52,6 +52,10 @@ class BlockGroup(object):
     
     def setFallingDown(self, isFallingDown):
         self.isFallingDown = isFallingDown
+        if isFallingDown:
+            pygame.key.set_mods(KMOD_MODE)
+        else:
+            pygame.key.set_mods(0)
 
     def setBaseIndexes(self, baseRow, baseCol):
         for block in self.blocks:
@@ -111,7 +115,6 @@ class BlockGroup(object):
 
         if pressed[K_DOWN] and not self.isPause:
             self.setFallingDown(True)
-            pygame.event.set_blocked(pygame.KEYDOWN)
 
         if self.blockGroupType == const.BlockGroupType.DROP:
             for block in self.blocks:
@@ -156,9 +159,9 @@ class BlockGroup(object):
         for block in self.blocks:
             if eliminateRow.get(block.getIndex()):
                 block.startBlink()
-                sound = pygame.mixer.Sound(const.ELIMINATE_SOUND)
-                sound.set_volume(0.15)
-                sound.play()
+        sound = pygame.mixer.Sound(const.ELIMINATE_SOUND)
+        sound.set_volume(0.2)
+        sound.play()
 
     def processEliminate(self):
         hash = {}
