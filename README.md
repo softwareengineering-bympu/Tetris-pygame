@@ -23,8 +23,15 @@ This project aims to develop a Tetris game, providing players with the classic T
 ## Purpose of the software
 
 The purpose of our software is to develop a high-quality Tetris game. Tetris is a classic puzzle game where players must arrange falling blocks of different shapes to create complete rows. Our goal is to provide an engaging and enjoyable gaming experience for users, capturing the essence of the original game while incorporating modern features and enhancements.
+<<<<<<< HEAD
 Architecture Approach: High-Quality + Waterfall
 For the development of our Tetris game, we have adopted a high-quality approach combined with the waterfall model. The high-quality approach ensures that our software meets the highest standards of functionality, usability, performance, and reliability. We prioritize robust code, efficient algorithms, and an intuitive user interface to deliver a seamless and enjoyable gaming experience.
+=======
+Architecture Approach: ***High-Quality + Waterfall***
+
+For the development of our Tetris game, we have adopted a high-quality approach combined with the waterfall model. The high-quality approach ensures that our software meets the highest standards of functionality, usability, performance, and reliability. We prioritize robust code, efficient algorithms, and an intuitive user interface to deliver a seamless and enjoyable gaming experience.
+
+>>>>>>> refs/remotes/origin/main
 The waterfall model provides a structured framework for the development process. It involves distinct phases, including requirements gathering, design, implementation, testing, and deployment. This sequential approach allows for careful planning, thorough documentation, and well-defined milestones, ensuring that each stage is completed before moving to the next. By following the waterfall model, we aim to deliver a polished and error-free Tetris game that meets the specified requirements and exceeds user expectations.
 
 
@@ -138,7 +145,7 @@ We Divide blocks into several groups to handle all of the status:
   * Fixed Block Group: We use a list to record every time the fixed block group will be like.
   * Block Elimination: We simply use lists to record the row of blocks that should be eliminated, then it will be replaced with an empty list. 
   * Block Collision: We use a hash table to handle it. It firstly get all of the information about current block groups. If the index is found in the hash table, or the current row that one of the block in is larger or equal than the row of game, it indicates there is a collision.
-  * Game logic: It always needs a infinite loop to run. Then we use many boolean values to handle current status of the game.
+  * Game Logic: It always needs a infinite loop to run. Then we use many boolean values to handle current status of the game.
 
 
 

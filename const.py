@@ -10,6 +10,7 @@ PAUSE_BUTTON_IMAGE = "pic/pause.png"
 RESTART_BUTTON_IMAGE = "pic/restart.png"
 BACKSTART_BUTTON_IMAGE = "pic/return.png"
 
+
 # Number the color to create block in random color
 class BlockType:
     RED = 0
