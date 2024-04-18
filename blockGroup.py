@@ -113,7 +113,7 @@ class BlockGroup(object):
             for block in self.blocks:
                 block.rotate()
 
-        if pressed[K_DOWN] and not self.isPause:
+        if pressed[K_DOWN] and self.checkAndSetPressTime(K_DOWN) and not self.isPause:
             self.setFallingDown(True)
 
         if self.blockGroupType == const.BlockGroupType.DROP:
