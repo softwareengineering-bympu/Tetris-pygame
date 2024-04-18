@@ -141,6 +141,14 @@ class BlockGroup(object):
                 tmpBlocks = []
                 for block in self.blocks:
                     if block.getIndex()[0] not in self.eliminateRow:
+                        
+                        # if the current block is between the first and second row of blocks should be eliminated
+                        if len(self.eliminateRow) > 1 and block.getIndex()[0] < self.eliminateRow[0] and block.getIndex()[0] > self.eliminateRow[1]:
+                            block.drop(1)
+                        # if the current block is between the second and third blocks should be eliminated
+                        elif len(self.eliminateRow) > 2 and block.getIndex()[0] < self.eliminateRow[1] and block.getIndex()[0] > self.eliminateRow[2]:
+                            block.drop(2)
+
                         if block.getIndex()[0] < self.eliminateRow[0]:
                             block.drop(len(self.eliminateRow))
                         tmpBlocks.append(block)
