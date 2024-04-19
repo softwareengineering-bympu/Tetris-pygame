@@ -87,6 +87,27 @@ class BlockGroup(object):
             self.pressTime[key] = getCurrentTime()
         return ret
 
+    def rotate(self):
+        # 尝试旋转每个方块
+        for block in self.blocks:
+            block.rotate()
+
+        # 检查是否越过左边界，并找出最小的负偏移量
+        leftOffsets = [block.colIdx for block in self.blocks if block.colIdx < 0]
+        if leftOffsets:  # 如果列表不为空
+            minLeftOffset = min(leftOffsets)
+            # 如果有方块越过左边界，向右移动所有方块
+            for block in self.blocks:
+                block.moveRight(abs(minLeftOffset))
+
+        # 检查是否越过右边界，并找出最大的正偏移量
+        rightOffsets = [block.colIdx - (const.GAME_COL - 1) for block in self.blocks if block.colIdx >= const.GAME_COL]
+        if rightOffsets:  # 如果列表不为空
+            maxRightOffset = max(rightOffsets)
+            # 如果有方块越过右边界，向左移动所有方块
+            for block in self.blocks:
+                block.moveLeft(maxRightOffset)
+
     def keyDownHandler(self):
         pressed = pygame.key.get_pressed()
         if pressed[K_LEFT] and self.checkAndSetPressTime(K_LEFT) and not self.isPause:
@@ -97,7 +118,7 @@ class BlockGroup(object):
                     break
             if b:
                 for block in self.blocks:
-                    block.moveLeft()
+                    block.moveLeft(1)
 
         if pressed[K_RIGHT] and self.checkAndSetPressTime(K_RIGHT) and not self.isPause:
             b = True
@@ -107,11 +128,10 @@ class BlockGroup(object):
                     break
             if b:
                 for block in self.blocks:
-                    block.moveRight()
+                    block.moveRight(1)
 
         if pressed[K_UP] and self.checkAndSetPressTime(K_UP) and not self.isPause:
-            for block in self.blocks:
-                block.rotate()
+            self.rotate()
 
         if pressed[K_DOWN] and self.checkAndSetPressTime(K_DOWN) and not self.isPause:
             self.setFallingDown(True)

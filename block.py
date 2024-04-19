@@ -59,11 +59,13 @@ class Block(pygame.sprite.Sprite):
     def isRightBoundary(self):
         return self.colIdx == const.GAME_COL - 1
 
-    def moveLeft(self):
-        self.baseColIdx -= 1
+    def moveLeft(self, cols):
+        self.baseColIdx -= cols
+        self.updateImagePos()
 
-    def moveRight(self):
-        self.baseColIdx += 1
+    def moveRight(self, cols):
+        self.baseColIdx += cols
+        self.updateImagePos()
 
     def rotate(self):
         self.blockRotate += 1
