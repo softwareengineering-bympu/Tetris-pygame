@@ -88,45 +88,54 @@ class BlockGroup(object):
         return ret
 
     def rotate(self):
-        # 尝试旋转每个方块
+        # Try to rotate
         for block in self.blocks:
             block.rotate()
 
-        # 检查是否越过左边界，并找出最小的负偏移量
+        # Check whether the left boundary has been crossed
         leftOffsets = [block.colIdx for block in self.blocks if block.colIdx < 0]
-        if leftOffsets:  # 如果列表不为空
+        if leftOffsets:
             minLeftOffset = min(leftOffsets)
-            # 如果有方块越过左边界，向右移动所有方块
+            # If cross the left boundary, move all blocks to the right
             for block in self.blocks:
                 block.moveRight(abs(minLeftOffset))
 
-        # 检查是否越过右边界，并找出最大的正偏移量
+        # Check whether the right boundary has been crossed
         rightOffsets = [block.colIdx - (const.GAME_COL - 1) for block in self.blocks if block.colIdx >= const.GAME_COL]
         if rightOffsets:  # 如果列表不为空
             maxRightOffset = max(rightOffsets)
-            # 如果有方块越过右边界，向左移动所有方块
+            # If cross the right boundary, move all blocks to the left
             for block in self.blocks:
                 block.moveLeft(maxRightOffset)
 
-    def keyDownHandler(self):
+    def isPositionOccupied(self, row, col, fixedBlockGroup):
+        # 检查给定位置是否被静止的方块组占据
+        for block in fixedBlockGroup.getBlocks():
+            if (block.rowIdx, block.colIdx) == (row, col):
+                return True
+        return False
+
+    def canMove(self, direction, fixedBlockGroup):
+        # 检查是否可以向指定方向移动
+        for block in self.blocks:
+            nextRow, nextCol = block.rowIdx, block.colIdx
+            if direction == "left":
+                nextCol -= 1
+            elif direction == "right":
+                nextCol += 1
+            if nextCol < 0 or nextCol >= const.GAME_COL or self.isPositionOccupied(nextRow, nextCol, fixedBlockGroup):
+                return False
+        return True
+
+    def keyDownHandler(self, fixedBlockGroup):
         pressed = pygame.key.get_pressed()
         if pressed[K_LEFT] and self.checkAndSetPressTime(K_LEFT) and not self.isPause:
-            b = True
-            for block in self.blocks:
-                if block.isLeftBoundary():
-                    b = False
-                    break
-            if b:
+            if self.canMove("left", fixedBlockGroup):
                 for block in self.blocks:
                     block.moveLeft(1)
 
         if pressed[K_RIGHT] and self.checkAndSetPressTime(K_RIGHT) and not self.isPause:
-            b = True
-            for block in self.blocks:
-                if block.isRightBoundary():
-                    b = False
-                    break
-            if b:
+            if self.canMove("right", fixedBlockGroup):
                 for block in self.blocks:
                     block.moveRight(1)
 
@@ -140,7 +149,7 @@ class BlockGroup(object):
             for block in self.blocks:
                 block.setShadow(pressed[K_DOWN])
 
-    def update(self):
+    def update(self, fixedBlockGroup=None):
         oldTime = self.dropTime
         curTime = getCurrentTime()
         diffTime = curTime - oldTime
@@ -149,7 +158,8 @@ class BlockGroup(object):
                 self.dropTime = curTime
                 for b in self.blocks:
                     b.drop(1)
-            self.keyDownHandler()
+            if fixedBlockGroup is not None:
+                self.keyDownHandler(fixedBlockGroup)
             if self.getFallingDown():
                 self.setDropInterval(30)
 

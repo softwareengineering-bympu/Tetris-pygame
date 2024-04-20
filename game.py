@@ -76,7 +76,7 @@ class Game(pygame.sprite.Sprite):
             return
 
         if self.dropBlockGroup:
-            self.dropBlockGroup.update()
+            self.dropBlockGroup.update(self.fixedBlockGroup)
         else:
             self.generateDropBlockGroup()
             self.dropBlockGroup.setDropInterval(900)
